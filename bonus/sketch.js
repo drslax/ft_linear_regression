@@ -1,23 +1,37 @@
 var data = [];
-
-var m = 1;
+var m = 0;
 var b = 0;
+var slider
 
 function setup() {
-  createCanvas(400, 400);
+  var canvas = createCanvas(400, 400);
+  canvas.parent("canvascontainer")
+  slider = select("#myRange")
+  console.log(canvas)
 }
 
 function gradientDescent() {
-  var learning_rate = 0.1;
-  console.log(data);
+  var learning_rate = slider.value();
+  var insText = document.querySelector("#l_r");
+  insText.innerHTML = `Learning rate : ${slider.value()}`
+  console.log(learning_rate)
+  var tmp_m = 0;
+  var tmp_b = 0;
+  var prevM = m;
   for (var i = 0; i < data.length; i++) {
     var x = data[i].x;
     var y = data[i].y;
     var h = m * x + b;
     var error = h - y;
-    b = b - learning_rate * error;
-    m = m - learning_rate * error * x;
+    tmp_b += learning_rate * (1 / data.length) * error;
+    tmp_m += learning_rate * (1 / data.length) * error * x;
   }
+  b -= tmp_b;
+  m -= tmp_m;
+  if (Math.abs(m - prevM) < 0.0000001) {
+    noLoop();
+  }
+
 }
 
 function leastSquares() {
@@ -57,10 +71,14 @@ function drawLine() {
 }
 
 function mousePressed() {
-  var x = map(mouseX, 0, width, 0, 1);
-  var y = map(mouseY, 0, height, 1, 0);
-  var point = createVector(x, y);
-  data.push(point);
+  if (width <= 400 && height <= 400) {
+    var x = map(mouseX, 0, width, 0, 1);
+    var y = map(mouseY, 0, height, 1, 0);
+    if (x <= 1 && y <= 1 & y >= 0 && x >= 0) {
+      var point = createVector(x, y);
+      data.push(point);
+    }
+  }
 }
 
 function draw() {
