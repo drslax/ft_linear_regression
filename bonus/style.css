@@ -6,22 +6,31 @@ h3 {
   margin: 0px;
 }
 
+/* utiliy classes */
+.text-center {
+  text-align: center;
+}
+.py-1 {
+  padding: 1rem 0;
+}
+
 .butt {
   width: 400px;
 }
 
 .mybar {
-  width: 400px;
+  /* width: 400px; */
   margin-top: 10px;
   padding: 2px 0px 2px 0px;
 }
 
 .title {
-  margin: 5px;
+  padding: 5px;
 }
 
 .slidecontainer {
   width: 400px;
+  margin: 0 auto;
 }
 
 .slider {
@@ -31,10 +40,8 @@ h3 {
   margin: 10px 0px;
 }
 
-#canvascontainer {
-  width: 400px !important;
-  height: 400px !important;
-  margin: 0;
+.butt {
+  margin: 0 auto;
 }
 
 .container {
@@ -43,8 +50,8 @@ h3 {
   background: brown;
 }
 
-.app {
-  width: 100%;
+.app > div {
+  text-align: center;
 }
 
 body {
