@@ -1,20 +1,20 @@
 var data = [];
 var m = 0;
 var b = 0;
-var slider
+var slider;
 
 function setup() {
   var canvas = createCanvas(400, 400);
-  canvas.parent("canvascontainer")
-  slider = select("#myRange")
-  console.log(canvas)
+  canvas.parent("canvascontainer");
+  slider = select("#myRange");
+  console.log(canvas);
 }
 
 function gradientDescent() {
   var learning_rate = slider.value();
   var insText = document.querySelector("#l_r");
-  insText.innerHTML = `Learning rate : ${slider.value()}`
-  console.log(learning_rate)
+  insText.innerHTML = `Learning rate : ${slider.value()}`;
+  console.log(learning_rate);
   var tmp_m = 0;
   var tmp_b = 0;
   var prevM = m;
@@ -28,10 +28,9 @@ function gradientDescent() {
   }
   b -= tmp_b;
   m -= tmp_m;
-  if (Math.abs(m - prevM) < 0.0000001) {
+  if (Math.abs(m - prevM) < 0.000001) {
     noLoop();
   }
-
 }
 
 function leastSquares() {
@@ -74,7 +73,7 @@ function mousePressed() {
   if (width <= 400 && height <= 400) {
     var x = map(mouseX, 0, width, 0, 1);
     var y = map(mouseY, 0, height, 1, 0);
-    if (x <= 1 && y <= 1 & y >= 0 && x >= 0) {
+    if (x <= 1 && (y <= 1) & (y >= 0) && x >= 0) {
       var point = createVector(x, y);
       data.push(point);
     }

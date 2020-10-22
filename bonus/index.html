@@ -16,14 +16,39 @@
       type="text/javascript"
       src="sketch.js"
     ></script>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/98.css" />
+    <link rel="stylesheet" href="style.css" />
   </head>
 
   <body>
-    <div id="canvascontainer" ></div>
-    <div class="slidecontainer">
-        <input type="range" min="0.01" max="0.5" step="0.0001" value="0.05" class="slider" id="myRange">
-        <h3 style="text-align: center;" id="l_r">Learning rate : 0.05</h3>
+    <div class="container">
+      <div class="app">
+        <div style="text-align: center" class="butt">
+          <button>Click me</button>
+          <button>Click me</button>
+        </div>
+        <div class="title-bar mybar">
+          <div class="title-bar-text">
+            <span class="title">ft_linear_regression</span>
+          </div>
+          <div class="title-bar-controls">
+            <button aria-label="Close"></button>
+          </div>
+        </div>
+        <div id="canvascontainer"></div>
+        <div class="slidecontainer">
+          <input
+            type="range"
+            min="0.01"
+            max="0.5"
+            step="0.0001"
+            value="0.05"
+            class="slider"
+            id="myRange"
+          />
+          <h3 style="text-align: center" id="l_r">Learning rate</h3>
+        </div>
+      </div>
     </div>
   </body>
 </html>
