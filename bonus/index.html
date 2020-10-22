@@ -22,31 +22,34 @@
 
   <body>
     <div class="container">
-      <div class="app">
-        <div class="title-bar mybar">
-          <div class="title-bar-text">
-            <span class="title">ft_linear_regression</span>
-          </div>
+      <div class="app window">
+        <div class="title-bar">
+          <div class="title-bar-text">ft_linear_regression</div>
           <div class="title-bar-controls">
+            <button aria-label="Minimize"></button>
+            <button aria-label="Maximize"></button>
             <button aria-label="Close"></button>
           </div>
         </div>
-        <div id="canvascontainer"></div>
-        <div class="slidecontainer">
-          <input
-            type="range"
-            min="0.01"
-            max="0.5"
-            step="0.0001"
-            value="0.05"
-            class="slider"
-            id="myRange"
-          />
-          <h3 class="text-center py-1">Learning rate</h3>
-        </div>
-        <div class="butt py-1">
-          <button>Click me</button>
-          <button>Click me</button>
+        <div class="window-body">
+          <div id="canvascontainer"></div>
+          <div class="field-row">
+            <label for="myRange">learning_rate: </label>
+            <label for="myRange">0.05</label>
+            <input
+              id="myRange"
+              type="range"
+              min="0.05"
+              max="0.5"
+              value="0.25"
+              step="0.0001"
+            />
+            <label for="myRange">0.5</label>
+          </div>
+          <div class="buttn py-1">
+            <button>Click me</button>
+            <button>Click me</button>
+          </div>
         </div>
       </div>
     </div>

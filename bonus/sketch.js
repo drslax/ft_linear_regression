@@ -12,8 +12,6 @@ function setup() {
 
 function gradientDescent() {
   var learning_rate = slider.value();
-  var insText = document.querySelector("#l_r");
-  insText.innerHTML = `Learning rate : ${slider.value()}`;
   console.log(learning_rate);
   var tmp_m = 0;
   var tmp_b = 0;
