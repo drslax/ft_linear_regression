@@ -11,20 +11,14 @@
       type="text/javascript"
       src="libraries/p5.dom.js"
     ></script>
-    <script
-      language="javascript"
-      type="text/javascript"
-      src="sketch.js"
-    ></script>
-    <link rel="stylesheet" href="https://unpkg.com/98.css" />
+    <link rel="stylesheet" href="libraries/98.css" />
     <link rel="stylesheet" href="style.css" />
   </head>
-
   <body>
     <div class="container">
       <div class="app window">
         <div class="title-bar">
-          <div class="title-bar-text">ft_linear_regression</div>
+          <div class="title-bar-text">&nbsp; ft_linear_regression</div>
           <div class="title-bar-controls">
             <button aria-label="Minimize"></button>
             <button aria-label="Maximize"></button>
@@ -32,26 +26,33 @@
           </div>
         </div>
         <div class="window-body">
-          <div id="canvascontainer"></div>
-          <div class="field-row">
-            <label for="myRange">learning_rate: </label>
-            <label for="myRange">0.05</label>
-            <input
-              id="myRange"
-              type="range"
-              min="0.05"
-              max="0.5"
-              value="0.25"
-              step="0.0001"
-            />
-            <label for="myRange">0.5</label>
+          <div>
+            <div id="canvascontainer"></div>
+            <div class="field-row">
+              <label for="myRange">learning_rate: </label>
+              <label for="myRange">0.05</label>
+              <input
+                id="myRange"
+                type="range"
+                min="0.05"
+                max="0.5"
+                value="0.25"
+                step="0.0001"
+              />
+              <label for="myRange">0.5</label>
+            </div>
           </div>
-          <div class="buttn py-1">
-            <button>Click me</button>
-            <button>Click me</button>
-          </div>
+          <form class="frm py-1">
+            <button type="submit">Click me</button>
+            <select name="regType">
+              <option value="gradient">&nbsp; Gradient Descent</option>
+              <option value="least">&nbsp; Least Squares</option>
+            </select>
+          </form>
         </div>
       </div>
     </div>
+    <script src="app.js"></script>
+    <script src="sketch.js"></script>
   </body>
 </html>

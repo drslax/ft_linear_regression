@@ -11,7 +11,7 @@ body {
   padding: 1rem 0;
 }
 
-.buttn {
+.frm {
   width: 400px;
   margin: 0 auto;
 }
@@ -26,17 +26,13 @@ body {
 }
 
 .container {
-  width: 80%;
+  display: flex;
+  width: 50%;
   margin: auto;
-  background: brown;
 }
 
 .app > div {
   text-align: center;
-}
-
-body {
-  background-color: gray;
 }
 
 #l_r {
