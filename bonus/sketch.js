@@ -1,125 +1,118 @@
-var data;
+var data = [];
 var table;
 var m = 0;
 var b = 0;
-var index = 0;
 var typ;
 var slider;
-var iter = 0;
-var maxiter = 150;
+var thisalgo = function () {};
 
-function preload() {
-  table = loadJSON("../Data/test.json");
-}
+var sketch1 = function (p) {
+  p.preload = function () {
+    table = p.loadJSON("data.json");
+  };
 
-function setup() {
-  var canvas = createCanvas(400, 400);
-  canvas.parent("canvascontainer");
-  slider = select("#myRange");
-  data = table.samples;
-  for (var i = 0; i < data.length; i++) {
-    data[i].x = data[i].x / 250000;
-    data[i].y = data[i].y / 10000;
-  }
-}
-
-// stochastic gradient descent
-function sgd() {
-  var learning_rate = slider.value();
-  for (var i = 0; i < data.length; i++) {
-    var x = data[i].x;
-    var y = data[i].y;
-    var h = m * x + b;
-    var error = h - y;
-    b -= error * learning_rate;
-    m -= x * error * learning_rate;
-  }
-}
-
-// batch gradient descent
-function bgd() {
-  var learning_rate = slider.value();
-  //var learning_rate = 0.1;
-  var tmp_m = 0;
-  var tmp_b = 0;
-  for (var i = 0; i < data.length; i++) {
-    var x = data[i].x;
-    var y = data[i].y;
-    var h = m * x + b;
-    var error = h - y;
-    tmp_b += learning_rate * error;
-    tmp_m += learning_rate * error * x;
-  }
-  b -= (1 / data.length) * tmp_b;
-  m -= (1 / data.length) * tmp_m;
-}
-
-function leastSquares() {
-  var xsum = 0;
-  var ysum = 0;
-  for (var i = 0; i < data.length; i++) {
-    xsum += data[i].x;
-    ysum += data[i].y;
-  }
-  var xmean = xsum / data.length;
-  var ymean = ysum / data.length;
-  var num = 0;
-  var den = 0;
-
-  for (var i = 0; i < data.length; i++) {
-    var x = data[i].x;
-    var y = data[i].y;
-    num += (x - xmean) * (y - ymean);
-    den += (x - xmean) * (x - ymean);
-    m = num / den;
-    b = ymean - m * xmean;
-  }
-}
-
-function drawLine() {
-  var x1 = 0;
-  var y1 = m * x1 + b;
-  var x2 = 1;
-  var y2 = m * x2 + b;
-
-  x1 = map(x1, 0, 1, 0, width);
-  y1 = map(y1, 0, 1, height, 0);
-  x2 = map(x2, 0, 1, 0, width);
-  y2 = map(y2, 0, 1, height, 0);
-  stroke(0);
-  line(x1, y1, x2, y2);
-}
-/*
-function mousePressed() {
-  if (width <= 400 && height <= 400) {
-    var x = map(mouseX, 0, width, 0, 1);
-    var y = map(mouseY, 0, height, 1, 0);
-    if (x <= 1 && (y <= 1) & (y >= 0) && x >= 0) {
-      var point = createVector(x, y);
-      data.push(point);
+  p.setup = function () {
+    p.maxX = 0;
+    p.maxY = 0;
+    p.canvas = p.createCanvas(400, 400);
+    p.canvas.parent("canvascontainer");
+    slider = p.select("#myRange");
+    data = table.data;
+    for (var i = 0; i < data.length; i++) {
+      p.x = data[i].x;
+      p.y = data[i].y;
+      p.maxX = p.max(p.x, p.maxX);
+      p.maxY = p.max(p.y, p.maxY);
     }
-  }
-}
-*/
-function draw(a) {
+    p.maxX += (p.maxX * 1) / 5;
+    p.maxY += (p.maxY * 1) / 5;
+    console.log(p.maxX, p.maxY);
+    for (var i = 0; i < data.length; i++) {
+      data[i].x = data[i].x / p.maxX;
+      data[i].y = data[i].y / p.maxY;
+    }
+  };
+  p.drawLine = function () {
+    p.x1 = 0;
+    p.y1 = m * p.x1 + b;
+    p.x2 = 1;
+    p.y2 = m * p.x2 + b;
+
+    p.x1 = p.map(p.x1, 0, 1, 0, p.width);
+    p.y1 = p.map(p.y1, 0, 1, p.height, 0);
+    p.x2 = p.map(p.x2, 0, 1, 0, p.width);
+    p.y2 = p.map(p.y2, 0, 1, p.height, 0);
+    p.stroke(0);
+    p.line(p.x1, p.y1, p.x2, p.y2);
+  };
+  p.draw = function () {
+    p.background(255, 150, 150);
+    for (var i = 0; i < data.length; i++) {
+      p.x = p.map(data[i].x, 0, 1, 0, p.width);
+      p.y = p.map(data[i].y, 0, 1, p.height, 0);
+      p.stroke(255);
+      p.ellipse(p.x, p.y, 4, 4);
+    }
+    p.drawLine();
+    thisalgo();
+  };
+};
+
+// Free Hand
+
+var sketch2 = function (p) {
+  p.setup = function () {
+    p.canvas = p.createCanvas(400, 400);
+    p.canvas.parent("canvascontainer");
+    slider = p.select("#myRange");
+  };
+  p.drawLine = function () {
+    p.x1 = 0;
+    p.y1 = m * p.x1 + b;
+    p.x2 = 1;
+    p.y2 = m * p.x2 + b;
+
+    p.x1 = p.map(p.x1, 0, 1, 0, p.width);
+    p.y1 = p.map(p.y1, 0, 1, p.height, 0);
+    p.x2 = p.map(p.x2, 0, 1, 0, p.width);
+    p.y2 = p.map(p.y2, 0, 1, p.height, 0);
+    p.stroke(0);
+    p.line(p.x1, p.y1, p.x2, p.y2);
+  };
+  p.mousePressed = function () {
+    if (p.width <= 400 && p.height <= 400) {
+      p.x = p.map(p.mouseX, 0, p.width, 0, 1);
+      p.y = p.map(p.mouseY, 0, p.height, 1, 0);
+      if (p.x <= 1 && (p.y <= 1) & (p.y >= 0) && p.x >= 0) {
+        p.point = p.createVector(p.x, p.y);
+        data.push(p.point);
+      }
+    }
+  };
+  p.draw = function () {
+    p.background(255, 150, 150);
+    for (var i = 0; i < data.length; i++) {
+      p.x = p.map(data[i].x, 0, 1, 0, p.width);
+      p.y = p.map(data[i].y, 0, 1, p.height, 0);
+      p.stroke(255);
+      p.ellipse(p.x, p.y, 4, 4);
+    }
+    p.drawLine();
+    thisalgo();
+  };
+};
+
+var myp5 = new p5(sketch1);
+
+function selectAlgo(a) {
   if (a == "bgd" || a == "sgd" || a == "least") {
     typ = a;
   }
-  background(255, 150, 150);
-  for (var i = 0; i < data.length; i++) {
-    var x = map(data[i].x, 0, 1, 0, width);
-    var y = map(data[i].y, 0, 1, height, 0);
-    stroke(255);
-    ellipse(x, y, 4, 4);
-  }
   if (typ == "sgd") {
-    sgd();
-    drawLine();
+    thisalgo = sgd;
   } else if (typ == "bgd") {
-    bgd();
-    drawLine();
+    thisalgo = bgd;
   } else if (typ == "least") {
-    leastSquares();
-    drawLine();
+    thisalgo = leastSquares;
   }
 }

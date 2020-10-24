@@ -1,10 +1,12 @@
 const newForm = document.querySelector(".frm");
 const regOp = document.querySelectorAll("option");
 const learningRate = document.querySelector("#myRange");
+const dataMode = document.getElementsByName("dataMode");
 
 newForm.addEventListener("submit", (e) => {
   e.preventDefault();
-  draw(regOp[newForm.regType.selectedIndex].value);
+  var regTypeValue = regOp[newForm.regType.selectedIndex].value;
+  selectAlgo(regTypeValue);
 });
 
 newForm.addEventListener("change", (e) => {
