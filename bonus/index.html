@@ -26,8 +26,8 @@
           </div>
         </div>
         <div class="window-body">
-          <div>
-            <div id="canvascontainer"></div>
+          <div id="canvascontainer"></div>
+          <form class="frm py-1">
             <div class="field-row">
               <label for="myRange">learning_rate: </label>
               <label for="myRange">0.05</label>
@@ -36,16 +36,15 @@
                 type="range"
                 min="0.05"
                 max="0.5"
-                value="0.25"
-                step="0.0001"
+                value="0.1"
+                step="0.001"
               />
-              <label for="myRange">0.5</label>
+              <span>0.5</span>
             </div>
-          </div>
-          <form class="frm py-1">
             <button type="submit">Click me</button>
             <select name="regType">
-              <option value="gradient">&nbsp; Gradient Descent</option>
+              <option value="bgd">&nbsp; Batch Gradient Descent</option>
+              <option value="sgd">&nbsp; Stochastic Gradient Descent</option>
               <option value="least">&nbsp; Least Squares</option>
             </select>
           </form>

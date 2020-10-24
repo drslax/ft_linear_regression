@@ -151,6 +151,12 @@ button::-moz-focus-inner {
   background-repeat: no-repeat;
   background-position: top 3px left 4px;
 }
+.title-bar-controls button[aria-label="Refresh"] {
+  margin-left: 2px;
+  background-image: url("");
+  background-repeat: no-repeat;
+  background-position: top 3px left 4px;
+}
 .window-body {
   margin: 8px;
 }
